@@ -1,0 +1,836 @@
+openapi: 3.0.0
+info:
+  title: API del Microservicio de Localización y Organización
+  description: |
+    Especificación de la API para la gestión de datos de localización
+    y la organización de la empresa (tipos de contrato, cargos, sectores).
+  version: 1.0.0
+
+servers:
+  - url: 'https://api.rrhh.com/localizacion/v1'
+
+tags:
+  - name: Tipos de Contrato
+    description: Gestión de los tipos de contrato.
+  - name: Sectores
+    description: Gestión de los sectores de la empresa.
+  - name: Cargos
+    description: Gestión de los cargos de los funcionarios.
+  - name: Países
+    description: Gestión de los países.
+  - name: Ciudades
+    description: Gestión de las ciudades.
+  - name: Departamentos
+    description: Gestión de los departamentos.
+  - name: Barrios
+    description: Gestión de los barrios.
+
+paths:
+  /tipos-contrato:
+    get:
+      tags:
+        - Tipos de Contrato
+      summary: Obtener la lista de tipos de contrato
+      responses:
+        '200':
+          description: Lista de tipos de contrato obtenida.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TipoContrato'
+    post:
+      tags:
+        - Tipos de Contrato
+      summary: Crear un nuevo tipo de contrato
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoContrato'
+      responses:
+        '201':
+          description: Tipo de contrato creado.
+
+  /tipos-contrato/{id}:
+    get:
+      tags:
+        - Tipos de Contrato
+      summary: Obtener un tipo de contrato por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Tipo de contrato encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TipoContrato'
+        '404':
+          description: Tipo de contrato no encontrado.
+    patch:
+      tags:
+        - Tipos de Contrato
+      summary: Actualizar un tipo de contrato por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoContratoUpdate'
+      responses:
+        '200':
+          description: Tipo de contrato actualizado.
+        '404':
+          description: Tipo de contrato no encontrado.
+    delete:
+      tags:
+        - Tipos de Contrato
+      summary: Eliminar un tipo de contrato por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Tipo de contrato eliminado exitosamente.
+        '404':
+          description: Tipo de contrato no encontrado.
+
+  /sectores:
+    get:
+      tags:
+        - Sectores
+      summary: Obtener la lista de sectores
+      responses:
+        '200':
+          description: Lista de sectores obtenida.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sector'
+    post:
+      tags:
+        - Sectores
+      summary: Crear un nuevo sector
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sector'
+      responses:
+        '201':
+          description: Sector creado.
+
+  /sectores/{id}:
+    get:
+      tags:
+        - Sectores
+      summary: Obtener un sector por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Sector encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sector'
+        '404':
+          description: Sector no encontrado.
+    patch:
+      tags:
+        - Sectores
+      summary: Actualizar un sector por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SectorUpdate'
+      responses:
+        '200':
+          description: Sector actualizado.
+        '404':
+          description: Sector no encontrado.
+    delete:
+      tags:
+        - Sectores
+      summary: Eliminar un sector por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Sector eliminado exitosamente.
+        '404':
+          description: Sector no encontrado.
+
+  /cargos:
+    get:
+      tags:
+        - Cargos
+      summary: Obtener la lista de cargos
+      responses:
+        '200':
+          description: Lista de cargos obtenida.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cargo'
+    post:
+      tags:
+        - Cargos
+      summary: Crear un nuevo cargo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cargo'
+      responses:
+        '201':
+          description: Cargo creado.
+
+  /cargos/{id}:
+    get:
+      tags:
+        - Cargos
+      summary: Obtener un cargo por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Cargo encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cargo'
+        '404':
+          description: Cargo no encontrado.
+    patch:
+      tags:
+        - Cargos
+      summary: Actualizar un cargo por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CargoUpdate'
+      responses:
+        '200':
+          description: Cargo actualizado.
+        '404':
+          description: Cargo no encontrado.
+    delete:
+      tags:
+        - Cargos
+      summary: Eliminar un cargo por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Cargo eliminado exitosamente.
+        '404':
+          description: Cargo no encontrado.
+  
+  /paises:
+    get:
+      tags:
+        - Países
+      summary: Obtener la lista de países
+      responses:
+        '200':
+          description: Lista de países obtenida.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pais'
+    post:
+      tags:
+        - Países
+      summary: Crear un nuevo país
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pais'
+      responses:
+        '201':
+          description: País creado.
+  /paises/{pais_id}/departamentos:
+    get:
+      tags:
+        - Países
+      summary: Obtener departamentos por ID de país
+      parameters:
+        - name: pais_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lista de departamentos por país.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Departamento'
+        '404':
+          description: No se encontraron departamentos para el país proporcionado.
+  /paises/{id}:
+    get:
+      tags:
+        - Países
+      summary: Obtener un país por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: País encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pais'
+        '404':
+          description: País no encontrado.
+    patch:
+      tags:
+        - Países
+      summary: Actualizar un país por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaisUpdate'
+      responses:
+        '200':
+          description: País actualizado.
+        '404':
+          description: País no encontrado.
+    delete:
+      tags:
+        - Países
+      summary: Eliminar un país por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: País eliminado exitosamente.
+        '404':
+          description: País no encontrado.
+
+  /departamentos:
+    get:
+      tags:
+        - Departamentos
+      summary: Obtener la lista de departamentos
+      responses:
+        '200':
+          description: Lista de departamentos obtenida.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Departamento'
+    post:
+      tags:
+        - Departamentos
+      summary: Crear un nuevo departamento
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Departamento'
+      responses:
+        '201':
+          description: Departamento creado.
+  /departamentos/{id}:
+    get:
+      tags:
+        - Departamentos
+      summary: Obtener un departamento por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Departamento encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Departamento'
+        '404':
+          description: Departamento no encontrado.
+    patch:
+      tags:
+        - Departamentos
+      summary: Actualizar un departamento por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepartamentoUpdate'
+      responses:
+        '200':
+          description: Departamento actualizado.
+        '404':
+          description: Departamento no encontrado.
+    delete:
+      tags:
+        - Departamentos
+      summary: Eliminar un departamento por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Departamento eliminado exitosamente.
+        '404':
+          description: Departamento no encontrado.
+
+  /ciudades:
+    get:
+      tags:
+        - Ciudades
+      summary: Obtener la lista de ciudades
+      responses:
+        '200':
+          description: Lista de ciudades obtenida.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ciudad'
+    post:
+      tags:
+        - Ciudades
+      summary: Crear una nueva ciudad
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ciudad'
+      responses:
+        '201':
+          description: Ciudad creada.
+
+  /departamentos/{departamento_id}/ciudades:
+    get:
+      tags:
+        - Departamentos
+      summary: Obtener ciudades por ID de departamento
+      parameters:
+        - name: departamento_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lista de ciudades por departamento.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ciudad'
+        '404':
+          description: No se encontraron ciudades para el departamento proporcionado.
+  
+  /ciudades/{id}:
+    get:
+      tags:
+        - Ciudades
+      summary: Obtener una ciudad por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Ciudad encontrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ciudad'
+        '404':
+          description: Ciudad no encontrada.
+    patch:
+      tags:
+        - Ciudades
+      summary: Actualizar una ciudad por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CiudadUpdate'
+      responses:
+        '200':
+          description: Ciudad actualizada.
+        '404':
+          description: Ciudad no encontrada.
+    delete:
+      tags:
+        - Ciudades
+      summary: Eliminar una ciudad por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Ciudad eliminada exitosamente.
+        '404':
+          description: Ciudad no encontrada.
+  /ciudades/{ciudad_id}/barrios:
+    get:
+      tags:
+        - Ciudades
+      summary: Obtener barrios por ID de ciudad
+      parameters:
+        - name: ciudad_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lista de barrios por ciudad.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Barrio'
+        '404':
+          description: No se encontraron barrios para la ciudad proporcionada.
+  /barrios:
+    get:
+      tags:
+        - Barrios
+      summary: Obtener la lista de barrios
+      responses:
+        '200':
+          description: Lista de barrios obtenida.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Barrio'
+    post:
+      tags:
+        - Barrios
+      summary: Crear un nuevo barrio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Barrio'
+      responses:
+        '201':
+          description: Barrio creado.
+  /barrios/{id}:
+    get:
+      tags:
+        - Barrios
+      summary: Obtener un barrio por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Barrio encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Barrio'
+        '404':
+          description: Barrio no encontrado.
+    patch:
+      tags:
+        - Barrios
+      summary: Actualizar un barrio por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BarrioUpdate'
+      responses:
+        '200':
+          description: Barrio actualizado.
+        '404':
+          description: Barrio no encontrado.
+    delete:
+      tags:
+        - Barrios
+      summary: Eliminar un barrio por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Barrio eliminado exitosamente.
+        '404':
+          description: Barrio no encontrado.
+
+components:
+  schemas:
+    TipoContrato:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        duracion_dias:
+          type: integer
+      required:
+        - nombre
+
+    TipoContratoUpdate:
+      type: object
+      properties:
+        nombre:
+          type: string
+        duracion_dias:
+          type: integer
+
+    Sector:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+      required:
+        - nombre
+
+    SectorUpdate:
+      type: object
+      properties:
+        nombre:
+          type: string
+
+    Cargo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        salario_base:
+          type: number
+          format: float
+        sector_id:
+          type: integer
+      required:
+        - nombre
+        - salario_base
+
+    CargoUpdate:
+      type: object
+      properties:
+        nombre:
+          type: string
+        salario_base:
+          type: number
+          format: float
+        sector_id:
+          type: integer
+
+    Pais:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+      required:
+        - nombre
+    
+    PaisUpdate:
+      type: object
+      properties:
+        nombre:
+          type: string
+
+    Departamento:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        pais_id:
+          type: integer
+      required:
+        - nombre
+        - pais_id
+
+    DepartamentoUpdate:
+      type: object
+      properties:
+        nombre:
+          type: string
+        pais_id:
+          type: integer
+
+    Ciudad:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        departamento_id:
+          type: integer
+      required:
+        - nombre
+        - departamento_id
+
+    CiudadUpdate:
+      type: object
+      properties:
+        nombre:
+          type: string
+        departamento_id:
+          type: integer
+
+    Barrio:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        nombre:
+          type: string
+        ciudad_id:
+          type: integer
+      required:
+        - nombre
+        - ciudad_id
+
+    BarrioUpdate:
+      type: object
+      properties:
+        nombre:
+          type: string
+        ciudad_id:
+          type: integer
