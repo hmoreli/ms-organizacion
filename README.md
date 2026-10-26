@@ -8,6 +8,8 @@ Implementa el contrato [`contrato/openapi.yaml`](contrato/openapi.yaml) con Fast
 
 - `Pais` suma `codigo_iso` y `gentilicio` (opcionales), que estaban en el ScriptBD.sql.
 - Los listados aceptan `?limit=&offset=` y filtros por el padre (`/cargos?sector_id=`, `/departamentos?pais_id=`, etc.).
+- Los montos (`salario_base`) salen como texto (`"4500000.00"`) para no perder precisión.
+- Búsqueda por texto con `?q=` en los catálogos (por nombre; en países también por código ISO).
 - No se puede borrar un registro en uso (por ejemplo un país con departamentos): responde 409.
 
 ## Desarrollo

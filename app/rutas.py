@@ -10,6 +10,8 @@ from app.db import obtener_sesion
 
 
 def _crud(modelo, crear, parche, salida, prefijo, etiqueta, nombre, **extra):
+    # Todos los catálogos se pueden buscar por nombre (?q=) para los combos del frontend.
+    extra.setdefault("busqueda", ("nombre",))
     return router_crud(
         modelo=modelo,
         crear=crear,
@@ -77,7 +79,15 @@ routers = [
         "Tipos de Contrato",
         "Tipo de contrato",
     ),
-    _crud(m.Sector, e.Sector, e.SectorUpdate, e.SectorSalida, "/sectores", "Sectores", "Sector"),
+    _crud(
+        m.Sector,
+        e.Sector,
+        e.SectorUpdate,
+        e.SectorSalida,
+        "/sectores",
+        "Sectores",
+        "Sector",
+    ),
     _crud(
         m.Cargo,
         e.Cargo,
@@ -88,7 +98,16 @@ routers = [
         "Cargo",
         filtros={"sector_id": int},
     ),
-    _crud(m.Pais, e.Pais, e.PaisUpdate, e.PaisSalida, "/paises", "Países", "País"),
+    _crud(
+        m.Pais,
+        e.Pais,
+        e.PaisUpdate,
+        e.PaisSalida,
+        "/paises",
+        "Países",
+        "País",
+        busqueda=("nombre", "codigo_iso"),
+    ),
     _crud(
         m.Departamento,
         e.Departamento,

@@ -14,7 +14,7 @@ def test_cargo_con_salario_como_numero(cliente):
         "/cargos",
         {"nombre": "Contador", "salario_base": 4500000, "sector_id": sector["id"]},
     )
-    assert cargo["salario_base"] == 4500000.0
+    assert cargo["salario_base"] == "4500000.00"
     assert cliente.get(f"/cargos?sector_id={sector['id']}", headers=CONSULTA).json() == [cargo]
 
 
@@ -84,3 +84,15 @@ def test_rutas_del_contrato_existen(cliente):
         "/barrios/{id}",
     }
     assert esperadas <= set(rutas)
+
+
+def test_busqueda_en_catalogos(cliente):
+    for nombre, iso in (("Paraguay", "PRY"), ("Argentina", "ARG"), ("Uruguay", "URY")):
+        crear(cliente, "/paises", {"nombre": nombre, "codigo_iso": iso})
+    assert [p["nombre"] for p in cliente.get("/paises?q=guay", headers=CONSULTA).json()] == [
+        "Paraguay",
+        "Uruguay",
+    ]
+    assert [p["nombre"] for p in cliente.get("/paises?q=arg", headers=CONSULTA).json()] == [
+        "Argentina"
+    ]

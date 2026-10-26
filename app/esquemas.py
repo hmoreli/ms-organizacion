@@ -7,10 +7,11 @@ del ScriptBD.sql), ambos opcionales.
 from decimal import Decimal
 from typing import Annotated
 
-from pydantic import BaseModel, ConfigDict, Field, PlainSerializer
+from pydantic import BaseModel, ConfigDict, Field
 
-# El contrato define salario_base como number: se serializa como número, no como string.
-Monto = Annotated[Decimal, Field(ge=0), PlainSerializer(float, return_type=float, when_used="json")]
+# NUMERIC(14,2): entra como número o texto y sale como texto ("4500000.00") para no
+# perder precisión en guaraníes.
+Monto = Annotated[Decimal, Field(ge=0, max_digits=14, decimal_places=2)]
 Nombre = Annotated[str, Field(min_length=1, max_length=100)]
 
 
