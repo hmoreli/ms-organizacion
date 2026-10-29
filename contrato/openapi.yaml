@@ -1,0 +1,1988 @@
+# Generado desde el código (app.openapi()). No editar a mano.
+openapi: 3.1.0
+info:
+  title: Microservicio de Localización y Organización
+  version: 1.0.0
+paths:
+  /tipos-contrato:
+    get:
+      tags:
+      - Tipos de Contrato
+      summary: Listar tipos-contrato
+      operationId: listar_tipos_contrato_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Cantidad de registros
+          default: 50
+          title: Limit
+        description: Cantidad de registros
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: Registros a saltear
+          default: 0
+          title: Offset
+        description: Registros a saltear
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+          title: Q
+        description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TipoContratoSalida'
+                title: Response Listar Tipos Contrato Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Tipos de Contrato
+      summary: Crear tipo de contrato
+      operationId: crear__tipos_contrato_post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoContrato'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TipoContratoSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /tipos-contrato/{id}:
+    get:
+      tags:
+      - Tipos de Contrato
+      summary: Obtener tipo de contrato por ID
+      operationId: obtener_tipos_contrato__id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TipoContratoSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - Tipos de Contrato
+      summary: Actualizar tipo de contrato
+      operationId: actualizar_tipos_contrato__id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoContratoUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TipoContratoSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Tipos de Contrato
+      summary: Eliminar tipo de contrato
+      operationId: eliminar_tipos_contrato__id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /sectores:
+    get:
+      tags:
+      - Sectores
+      summary: Listar sectores
+      operationId: listar_sectores_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Cantidad de registros
+          default: 50
+          title: Limit
+        description: Cantidad de registros
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: Registros a saltear
+          default: 0
+          title: Offset
+        description: Registros a saltear
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+          title: Q
+        description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SectorSalida'
+                title: Response Listar Sectores Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Sectores
+      summary: Crear sector
+      operationId: crear__sectores_post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sector'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectorSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /sectores/{id}:
+    get:
+      tags:
+      - Sectores
+      summary: Obtener sector por ID
+      operationId: obtener_sectores__id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectorSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - Sectores
+      summary: Actualizar sector
+      operationId: actualizar_sectores__id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SectorUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectorSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Sectores
+      summary: Eliminar sector
+      operationId: eliminar_sectores__id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /cargos:
+    get:
+      tags:
+      - Cargos
+      summary: Listar cargos
+      operationId: listar_cargos_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Cantidad de registros
+          default: 50
+          title: Limit
+        description: Cantidad de registros
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: Registros a saltear
+          default: 0
+          title: Offset
+        description: Registros a saltear
+      - name: sector_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Filtrar por sector_id
+          title: Sector Id
+        description: Filtrar por sector_id
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+          title: Q
+        description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CargoSalida'
+                title: Response Listar Cargos Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Cargos
+      summary: Crear cargo
+      operationId: crear__cargos_post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cargo'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CargoSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /cargos/{id}:
+    get:
+      tags:
+      - Cargos
+      summary: Obtener cargo por ID
+      operationId: obtener_cargos__id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CargoSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - Cargos
+      summary: Actualizar cargo
+      operationId: actualizar_cargos__id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CargoUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CargoSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Cargos
+      summary: Eliminar cargo
+      operationId: eliminar_cargos__id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /paises:
+    get:
+      tags:
+      - Países
+      summary: Listar paises
+      operationId: listar_paises_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Cantidad de registros
+          default: 50
+          title: Limit
+        description: Cantidad de registros
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: Registros a saltear
+          default: 0
+          title: Offset
+        description: Registros a saltear
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          description: 'Buscar texto (sin distinguir mayúsculas) en: nombre, codigo_iso'
+          title: Q
+        description: 'Buscar texto (sin distinguir mayúsculas) en: nombre, codigo_iso'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaisSalida'
+                title: Response Listar Paises Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Países
+      summary: Crear país
+      operationId: crear__paises_post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pais'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaisSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /paises/{id}:
+    get:
+      tags:
+      - Países
+      summary: Obtener país por ID
+      operationId: obtener_paises__id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaisSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - Países
+      summary: Actualizar país
+      operationId: actualizar_paises__id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaisUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaisSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Países
+      summary: Eliminar país
+      operationId: eliminar_paises__id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /departamentos:
+    get:
+      tags:
+      - Departamentos
+      summary: Listar departamentos
+      operationId: listar_departamentos_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Cantidad de registros
+          default: 50
+          title: Limit
+        description: Cantidad de registros
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: Registros a saltear
+          default: 0
+          title: Offset
+        description: Registros a saltear
+      - name: pais_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Filtrar por pais_id
+          title: Pais Id
+        description: Filtrar por pais_id
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+          title: Q
+        description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DepartamentoSalida'
+                title: Response Listar Departamentos Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Departamentos
+      summary: Crear departamento
+      operationId: crear__departamentos_post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Departamento'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartamentoSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /departamentos/{id}:
+    get:
+      tags:
+      - Departamentos
+      summary: Obtener departamento por ID
+      operationId: obtener_departamentos__id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartamentoSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - Departamentos
+      summary: Actualizar departamento
+      operationId: actualizar_departamentos__id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepartamentoUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartamentoSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Departamentos
+      summary: Eliminar departamento
+      operationId: eliminar_departamentos__id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /ciudades:
+    get:
+      tags:
+      - Ciudades
+      summary: Listar ciudades
+      operationId: listar_ciudades_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Cantidad de registros
+          default: 50
+          title: Limit
+        description: Cantidad de registros
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: Registros a saltear
+          default: 0
+          title: Offset
+        description: Registros a saltear
+      - name: departamento_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Filtrar por departamento_id
+          title: Departamento Id
+        description: Filtrar por departamento_id
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+          title: Q
+        description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CiudadSalida'
+                title: Response Listar Ciudades Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Ciudades
+      summary: Crear ciudad
+      operationId: crear__ciudades_post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ciudad'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CiudadSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /ciudades/{id}:
+    get:
+      tags:
+      - Ciudades
+      summary: Obtener ciudad por ID
+      operationId: obtener_ciudades__id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CiudadSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - Ciudades
+      summary: Actualizar ciudad
+      operationId: actualizar_ciudades__id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CiudadUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CiudadSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Ciudades
+      summary: Eliminar ciudad
+      operationId: eliminar_ciudades__id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /barrios:
+    get:
+      tags:
+      - Barrios
+      summary: Listar barrios
+      operationId: listar_barrios_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Cantidad de registros
+          default: 50
+          title: Limit
+        description: Cantidad de registros
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: Registros a saltear
+          default: 0
+          title: Offset
+        description: Registros a saltear
+      - name: ciudad_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          description: Filtrar por ciudad_id
+          title: Ciudad Id
+        description: Filtrar por ciudad_id
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+          title: Q
+        description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BarrioSalida'
+                title: Response Listar Barrios Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Barrios
+      summary: Crear barrio
+      operationId: crear__barrios_post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Barrio'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BarrioSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /barrios/{id}:
+    get:
+      tags:
+      - Barrios
+      summary: Obtener barrio por ID
+      operationId: obtener_barrios__id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BarrioSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - Barrios
+      summary: Actualizar barrio
+      operationId: actualizar_barrios__id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BarrioUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BarrioSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Barrios
+      summary: Eliminar barrio
+      operationId: eliminar_barrios__id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /entidades-bancarias:
+    get:
+      tags:
+      - Entidades Bancarias
+      summary: Listar entidades-bancarias
+      operationId: listar_entidades_bancarias_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Cantidad de registros
+          default: 50
+          title: Limit
+        description: Cantidad de registros
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: Registros a saltear
+          default: 0
+          title: Offset
+        description: Registros a saltear
+      - name: activo
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Filtrar por activo
+          title: Activo
+        description: Filtrar por activo
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+          title: Q
+        description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EntidadBancariaSalida'
+                title: Response Listar Entidades Bancarias Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Entidades Bancarias
+      summary: Crear entidad bancaria
+      operationId: crear__entidades_bancarias_post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntidadBancaria'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntidadBancariaSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /entidades-bancarias/{id}:
+    get:
+      tags:
+      - Entidades Bancarias
+      summary: Obtener entidad bancaria por ID
+      operationId: obtener_entidades_bancarias__id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntidadBancariaSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - Entidades Bancarias
+      summary: Actualizar entidad bancaria
+      operationId: actualizar_entidades_bancarias__id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntidadBancariaUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntidadBancariaSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Entidades Bancarias
+      summary: Eliminar entidad bancaria
+      operationId: eliminar_entidades_bancarias__id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /paises/{pais_id}/departamentos:
+    get:
+      tags:
+      - Países
+      summary: Obtener departamentos por ID de país
+      operationId: departamentos_de_pais_paises__pais_id__departamentos_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: pais_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Pais Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DepartamentoSalida'
+                title: Response Departamentos De Pais Paises  Pais Id  Departamentos Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /departamentos/{departamento_id}/ciudades:
+    get:
+      tags:
+      - Departamentos
+      summary: Obtener ciudades por ID de departamento
+      operationId: ciudades_de_departamento_departamentos__departamento_id__ciudades_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: departamento_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Departamento Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CiudadSalida'
+                title: Response Ciudades De Departamento Departamentos  Departamento Id  Ciudades Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /ciudades/{ciudad_id}/barrios:
+    get:
+      tags:
+      - Ciudades
+      summary: Obtener barrios por ID de ciudad
+      operationId: barrios_de_ciudad_ciudades__ciudad_id__barrios_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: ciudad_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Ciudad Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BarrioSalida'
+                title: Response Barrios De Ciudad Ciudades  Ciudad Id  Barrios Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    Barrio:
+      properties:
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        ciudad_id:
+          type: integer
+          title: Ciudad Id
+      type: object
+      required:
+      - nombre
+      - ciudad_id
+      title: Barrio
+    BarrioSalida:
+      properties:
+        id:
+          type: integer
+          title: Id
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        ciudad_id:
+          type: integer
+          title: Ciudad Id
+      type: object
+      required:
+      - id
+      - nombre
+      - ciudad_id
+      title: BarrioSalida
+    BarrioUpdate:
+      properties:
+        nombre:
+          anyOf:
+          - type: string
+            maxLength: 100
+            minLength: 1
+          - type: 'null'
+          title: Nombre
+        ciudad_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Ciudad Id
+      type: object
+      title: BarrioUpdate
+    Cargo:
+      properties:
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        salario_base:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: string
+          title: Salario Base
+        sector_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sector Id
+      type: object
+      required:
+      - nombre
+      - salario_base
+      title: Cargo
+    CargoSalida:
+      properties:
+        id:
+          type: integer
+          title: Id
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        salario_base:
+          type: string
+          title: Salario Base
+        sector_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sector Id
+      type: object
+      required:
+      - id
+      - nombre
+      - salario_base
+      title: CargoSalida
+    CargoUpdate:
+      properties:
+        nombre:
+          anyOf:
+          - type: string
+            maxLength: 100
+            minLength: 1
+          - type: 'null'
+          title: Nombre
+        salario_base:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: string
+          - type: 'null'
+          title: Salario Base
+        sector_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sector Id
+      type: object
+      title: CargoUpdate
+    Ciudad:
+      properties:
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        departamento_id:
+          type: integer
+          title: Departamento Id
+      type: object
+      required:
+      - nombre
+      - departamento_id
+      title: Ciudad
+    CiudadSalida:
+      properties:
+        id:
+          type: integer
+          title: Id
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        departamento_id:
+          type: integer
+          title: Departamento Id
+      type: object
+      required:
+      - id
+      - nombre
+      - departamento_id
+      title: CiudadSalida
+    CiudadUpdate:
+      properties:
+        nombre:
+          anyOf:
+          - type: string
+            maxLength: 100
+            minLength: 1
+          - type: 'null'
+          title: Nombre
+        departamento_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Departamento Id
+      type: object
+      title: CiudadUpdate
+    Departamento:
+      properties:
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        pais_id:
+          type: integer
+          title: Pais Id
+      type: object
+      required:
+      - nombre
+      - pais_id
+      title: Departamento
+    DepartamentoSalida:
+      properties:
+        id:
+          type: integer
+          title: Id
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        pais_id:
+          type: integer
+          title: Pais Id
+      type: object
+      required:
+      - id
+      - nombre
+      - pais_id
+      title: DepartamentoSalida
+    DepartamentoUpdate:
+      properties:
+        nombre:
+          anyOf:
+          - type: string
+            maxLength: 100
+            minLength: 1
+          - type: 'null'
+          title: Nombre
+        pais_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Pais Id
+      type: object
+      title: DepartamentoUpdate
+    EntidadBancaria:
+      properties:
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        activo:
+          type: boolean
+          title: Activo
+          default: true
+      type: object
+      required:
+      - nombre
+      title: EntidadBancaria
+    EntidadBancariaSalida:
+      properties:
+        id:
+          type: integer
+          title: Id
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        activo:
+          type: boolean
+          title: Activo
+          default: true
+      type: object
+      required:
+      - id
+      - nombre
+      title: EntidadBancariaSalida
+    EntidadBancariaUpdate:
+      properties:
+        nombre:
+          anyOf:
+          - type: string
+            maxLength: 100
+            minLength: 1
+          - type: 'null'
+          title: Nombre
+        activo:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Activo
+      type: object
+      title: EntidadBancariaUpdate
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Pais:
+      properties:
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        codigo_iso:
+          anyOf:
+          - type: string
+            maxLength: 3
+            minLength: 2
+          - type: 'null'
+          title: Codigo Iso
+        gentilicio:
+          anyOf:
+          - type: string
+            maxLength: 100
+          - type: 'null'
+          title: Gentilicio
+        codigo_telefono:
+          anyOf:
+          - type: string
+            pattern: ^[1-9][0-9]{0,2}$
+            description: Código telefónico sin +, p. ej. 595
+          - type: 'null'
+          title: Codigo Telefono
+      type: object
+      required:
+      - nombre
+      title: Pais
+    PaisSalida:
+      properties:
+        id:
+          type: integer
+          title: Id
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        codigo_iso:
+          anyOf:
+          - type: string
+            maxLength: 3
+            minLength: 2
+          - type: 'null'
+          title: Codigo Iso
+        gentilicio:
+          anyOf:
+          - type: string
+            maxLength: 100
+          - type: 'null'
+          title: Gentilicio
+        codigo_telefono:
+          anyOf:
+          - type: string
+            pattern: ^[1-9][0-9]{0,2}$
+            description: Código telefónico sin +, p. ej. 595
+          - type: 'null'
+          title: Codigo Telefono
+      type: object
+      required:
+      - id
+      - nombre
+      title: PaisSalida
+    PaisUpdate:
+      properties:
+        nombre:
+          anyOf:
+          - type: string
+            maxLength: 100
+            minLength: 1
+          - type: 'null'
+          title: Nombre
+        codigo_iso:
+          anyOf:
+          - type: string
+            maxLength: 3
+            minLength: 2
+          - type: 'null'
+          title: Codigo Iso
+        gentilicio:
+          anyOf:
+          - type: string
+            maxLength: 100
+          - type: 'null'
+          title: Gentilicio
+        codigo_telefono:
+          anyOf:
+          - type: string
+            pattern: ^[1-9][0-9]{0,2}$
+            description: Código telefónico sin +, p. ej. 595
+          - type: 'null'
+          title: Codigo Telefono
+      type: object
+      title: PaisUpdate
+    Sector:
+      properties:
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+      type: object
+      required:
+      - nombre
+      title: Sector
+    SectorSalida:
+      properties:
+        id:
+          type: integer
+          title: Id
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+      type: object
+      required:
+      - id
+      - nombre
+      title: SectorSalida
+    SectorUpdate:
+      properties:
+        nombre:
+          anyOf:
+          - type: string
+            maxLength: 100
+            minLength: 1
+          - type: 'null'
+          title: Nombre
+      type: object
+      title: SectorUpdate
+    TipoContrato:
+      properties:
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        duracion_dias:
+          anyOf:
+          - type: integer
+            minimum: 1.0
+          - type: 'null'
+          title: Duracion Dias
+      type: object
+      required:
+      - nombre
+      title: TipoContrato
+    TipoContratoSalida:
+      properties:
+        id:
+          type: integer
+          title: Id
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        duracion_dias:
+          anyOf:
+          - type: integer
+            minimum: 1.0
+          - type: 'null'
+          title: Duracion Dias
+      type: object
+      required:
+      - id
+      - nombre
+      title: TipoContratoSalida
+    TipoContratoUpdate:
+      properties:
+        nombre:
+          anyOf:
+          - type: string
+            maxLength: 100
+            minLength: 1
+          - type: 'null'
+          title: Nombre
+        duracion_dias:
+          anyOf:
+          - type: integer
+            minimum: 1.0
+          - type: 'null'
+          title: Duracion Dias
+      type: object
+      title: TipoContratoUpdate
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
+servers:
+- url: /api/organizacion
+  description: Detrás de Kong
