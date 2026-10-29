@@ -1,6 +1,6 @@
 from decimal import Decimal
 
-from sqlalchemy import ForeignKey, Numeric, String
+from sqlalchemy import Boolean, ForeignKey, Numeric, String, true
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db import Base
@@ -34,6 +34,8 @@ class Pais(Base):
     nombre: Mapped[str] = mapped_column(String(100), unique=True)
     codigo_iso: Mapped[str | None] = mapped_column(String(3), unique=True)
     gentilicio: Mapped[str | None] = mapped_column(String(100))
+    # Código telefónico internacional sin "+" (Paraguay: 595).
+    codigo_telefono: Mapped[str | None] = mapped_column(String(3))
 
 
 class Departamento(Base):
@@ -55,3 +57,11 @@ class Barrio(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     nombre: Mapped[str] = mapped_column(String(100))
     ciudad_id: Mapped[int] = mapped_column(ForeignKey("ciudad.id"), index=True)
+
+
+class EntidadBancaria(Base):
+    __tablename__ = "entidad_bancaria"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    nombre: Mapped[str] = mapped_column(String(100), unique=True)
+    # Las que dejan de operar se desactivan (los funcionarios pueden seguir apuntando a ellas).
+    activo: Mapped[bool] = mapped_column(Boolean, server_default=true(), default=True)

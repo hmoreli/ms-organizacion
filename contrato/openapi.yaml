@@ -1213,6 +1213,183 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /entidades-bancarias:
+    get:
+      tags:
+      - Entidades Bancarias
+      summary: Listar entidades-bancarias
+      operationId: listar_entidades_bancarias_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Cantidad de registros
+          default: 50
+          title: Limit
+        description: Cantidad de registros
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: Registros a saltear
+          default: 0
+          title: Offset
+        description: Registros a saltear
+      - name: activo
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          description: Filtrar por activo
+          title: Activo
+        description: Filtrar por activo
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+          title: Q
+        description: 'Buscar texto (sin distinguir mayúsculas) en: nombre'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EntidadBancariaSalida'
+                title: Response Listar Entidades Bancarias Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Entidades Bancarias
+      summary: Crear entidad bancaria
+      operationId: crear__entidades_bancarias_post
+      security:
+      - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntidadBancaria'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntidadBancariaSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /entidades-bancarias/{id}:
+    get:
+      tags:
+      - Entidades Bancarias
+      summary: Obtener entidad bancaria por ID
+      operationId: obtener_entidades_bancarias__id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntidadBancariaSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - Entidades Bancarias
+      summary: Actualizar entidad bancaria
+      operationId: actualizar_entidades_bancarias__id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntidadBancariaUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntidadBancariaSalida'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Entidades Bancarias
+      summary: Eliminar entidad bancaria
+      operationId: eliminar_entidades_bancarias__id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /paises/{pais_id}/departamentos:
     get:
       tags:
@@ -1528,6 +1705,56 @@ components:
           title: Pais Id
       type: object
       title: DepartamentoUpdate
+    EntidadBancaria:
+      properties:
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        activo:
+          type: boolean
+          title: Activo
+          default: true
+      type: object
+      required:
+      - nombre
+      title: EntidadBancaria
+    EntidadBancariaSalida:
+      properties:
+        id:
+          type: integer
+          title: Id
+        nombre:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Nombre
+        activo:
+          type: boolean
+          title: Activo
+          default: true
+      type: object
+      required:
+      - id
+      - nombre
+      title: EntidadBancariaSalida
+    EntidadBancariaUpdate:
+      properties:
+        nombre:
+          anyOf:
+          - type: string
+            maxLength: 100
+            minLength: 1
+          - type: 'null'
+          title: Nombre
+        activo:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Activo
+      type: object
+      title: EntidadBancariaUpdate
     HTTPValidationError:
       properties:
         detail:
@@ -1557,6 +1784,13 @@ components:
             maxLength: 100
           - type: 'null'
           title: Gentilicio
+        codigo_telefono:
+          anyOf:
+          - type: string
+            pattern: ^[1-9][0-9]{0,2}$
+            description: Código telefónico sin +, p. ej. 595
+          - type: 'null'
+          title: Codigo Telefono
       type: object
       required:
       - nombre
@@ -1584,6 +1818,13 @@ components:
             maxLength: 100
           - type: 'null'
           title: Gentilicio
+        codigo_telefono:
+          anyOf:
+          - type: string
+            pattern: ^[1-9][0-9]{0,2}$
+            description: Código telefónico sin +, p. ej. 595
+          - type: 'null'
+          title: Codigo Telefono
       type: object
       required:
       - id
@@ -1611,6 +1852,13 @@ components:
             maxLength: 100
           - type: 'null'
           title: Gentilicio
+        codigo_telefono:
+          anyOf:
+          - type: string
+            pattern: ^[1-9][0-9]{0,2}$
+            description: Código telefónico sin +, p. ej. 595
+          - type: 'null'
+          title: Codigo Telefono
       type: object
       title: PaisUpdate
     Sector:

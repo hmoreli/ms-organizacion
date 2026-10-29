@@ -138,5 +138,15 @@ routers = [
         "Barrio",
         filtros={"ciudad_id": int},
     ),
+    _crud(
+        m.EntidadBancaria,
+        e.EntidadBancaria,
+        e.EntidadBancariaUpdate,
+        e.EntidadBancariaSalida,
+        "/entidades-bancarias",
+        "Entidades Bancarias",
+        "Entidad bancaria",
+        filtros={"activo": bool},
+    ),
     anidados,
 ]

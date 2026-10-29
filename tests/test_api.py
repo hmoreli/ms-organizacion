@@ -96,3 +96,20 @@ def test_busqueda_en_catalogos(cliente):
     assert [p["nombre"] for p in cliente.get("/paises?q=arg", headers=CONSULTA).json()] == [
         "Argentina"
     ]
+
+
+def test_entidades_bancarias(cliente):
+    itau = crear(cliente, "/entidades-bancarias", {"nombre": "Banco Itaú"})
+    assert itau["activo"] is True
+    crear(cliente, "/entidades-bancarias", {"nombre": "Banco Familiar", "activo": False})
+    activas = cliente.get("/entidades-bancarias?activo=true", headers=CONSULTA).json()
+    assert [b["nombre"] for b in activas] == ["Banco Itaú"]
+    r = cliente.post("/entidades-bancarias", json={"nombre": "Banco Itaú"}, headers=OPERADOR)
+    assert r.status_code == 409
+
+
+def test_codigo_telefonico_del_pais(cliente):
+    py = crear(cliente, "/paises", {"nombre": "Paraguay", "codigo_telefono": "595"})
+    assert py["codigo_telefono"] == "595"
+    r = cliente.post("/paises", json={"nombre": "X", "codigo_telefono": "+595"}, headers=OPERADOR)
+    assert r.status_code == 422

@@ -1,12 +1,13 @@
 # ms-organizacion
 
-Microservicio de Localización y Organización. Catálogos compartidos: países, departamentos, ciudades, barrios, sectores, cargos (con salario base) y tipos de contrato.
+Microservicio de Localización y Organización. Catálogos compartidos: países, departamentos, ciudades, barrios, sectores, cargos (con salario base), tipos de contrato y entidades bancarias.
 
 Implementa el contrato [`contrato/openapi.yaml`](contrato/openapi.yaml) con FastAPI, SQLAlchemy 2 y Alembic sobre PostgreSQL (schema `organizacion`).
 
 ## Respecto al contrato
 
-- `Pais` suma `codigo_iso` y `gentilicio` (opcionales), que estaban en el ScriptBD.sql.
+- `Pais` suma `codigo_iso` y `gentilicio` (opcionales), que estaban en el ScriptBD.sql, y `codigo_telefono` (1 a 3 dígitos, sin `+`, ej. `595`), que usa el alta de funcionarios.
+- `/entidades-bancarias` (nombre único y `activo`; filtro `?activo=true`) para la cuenta bancaria del funcionario.
 - Los listados aceptan `?limit=&offset=` y filtros por el padre (`/cargos?sector_id=`, `/departamentos?pais_id=`, etc.).
 - Los montos (`salario_base`) salen como texto (`"4500000.00"`) para no perder precisión.
 - Búsqueda por texto con `?q=` en los catálogos (por nombre; en países también por código ISO).

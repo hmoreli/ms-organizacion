@@ -1,7 +1,7 @@
 """Esquemas del contrato contrato/openapi.yaml.
 
 Agregados respecto al contrato: `codigo_iso` y `gentilicio` en Pais (vienen
-del ScriptBD.sql), ambos opcionales.
+del ScriptBD.sql), `codigo_telefono` en Pais y las entidades bancarias.
 """
 
 from decimal import Decimal
@@ -13,6 +13,9 @@ from pydantic import BaseModel, ConfigDict, Field
 # perder precisión en guaraníes.
 Monto = Annotated[Decimal, Field(ge=0, max_digits=14, decimal_places=2)]
 Nombre = Annotated[str, Field(min_length=1, max_length=100)]
+CodigoTelefono = Annotated[
+    str, Field(pattern=r"^[1-9][0-9]{0,2}$", description="Código telefónico sin +, p. ej. 595")
+]
 
 
 class _Salida(BaseModel):
@@ -66,12 +69,14 @@ class Pais(BaseModel):
     nombre: Nombre
     codigo_iso: str | None = Field(None, min_length=2, max_length=3)
     gentilicio: str | None = Field(None, max_length=100)
+    codigo_telefono: CodigoTelefono | None = None
 
 
 class PaisUpdate(BaseModel):
     nombre: Nombre | None = None
     codigo_iso: str | None = Field(None, min_length=2, max_length=3)
     gentilicio: str | None = Field(None, max_length=100)
+    codigo_telefono: CodigoTelefono | None = None
 
 
 class PaisSalida(Pais, _Salida):
@@ -117,4 +122,18 @@ class BarrioUpdate(BaseModel):
 
 
 class BarrioSalida(Barrio, _Salida):
+    pass
+
+
+class EntidadBancaria(BaseModel):
+    nombre: Nombre
+    activo: bool = True
+
+
+class EntidadBancariaUpdate(BaseModel):
+    nombre: Nombre | None = None
+    activo: bool | None = None
+
+
+class EntidadBancariaSalida(EntidadBancaria, _Salida):
     pass
